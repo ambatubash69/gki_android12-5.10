@@ -3599,7 +3599,7 @@ static char *custom_module_blacklist[] = {
     "qcom_cpufreq_hw_debug", "qcom_iommu_debug", "qti_battery_debug", "rdbg", "spmi_glink_debug", "spmi_pmic_arb_debug",
     "debug_ext", "ehset", "lvstest",
     /* STM (System Trace Module devices) */
-    "stm_console", "stm_core", "stm_ftrace", "stm_p_basic", "stm_p_ost"
+    "stm_console", "stm_core", "stm_ftrace", "stm_p_basic", "stm_p_ost",
 #endif
 };
 
