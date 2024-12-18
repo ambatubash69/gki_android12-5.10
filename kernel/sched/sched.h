@@ -1978,6 +1978,9 @@ extern void init_sched_rt_class(void);
 extern void init_sched_fair_class(void);
 
 extern void reweight_task(struct task_struct *p, const struct load_weight *lw);
+#ifdef CONFIG_SCHED_BORE
+extern void _reweight_task(struct task_struct *p, int prio);
+#endif // CONFIG_SCHED_BORE
 
 extern void resched_curr(struct rq *rq);
 extern void resched_cpu(int cpu);

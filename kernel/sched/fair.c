@@ -177,7 +177,7 @@ static void update_burst_score(struct sched_entity *se) {
 
 	new_prio = min(39, prio + se->burst_score);
 	if (new_prio != prev_prio)
-		reweight_task(p, new_prio);
+		_reweight_task(p, new_prio);
 }
 
 static void update_burst_penalty(struct sched_entity *se) {
@@ -3245,6 +3245,19 @@ void reweight_task(struct task_struct *p, const struct load_weight *lw)
 	reweight_entity(cfs_rq, se, lw->weight);
 	load->inv_weight = lw->inv_weight;
 }
+
+#ifdef CONFIG_SCHED_BORE
+void _reweight_task(struct task_struct *p, int prio)
+{
+	struct sched_entity *se = &p->se;
+	struct cfs_rq *cfs_rq = cfs_rq_of(se);
+	struct load_weight *load = &se->load;
+	unsigned long weight = scale_load(sched_prio_to_weight[prio]);
+
+	reweight_entity(cfs_rq, se, weight);
+	load->inv_weight = sched_prio_to_wmult[prio];
+}
+#endif // CONFIG_SCHED_BORE
 
 #ifdef CONFIG_FAIR_GROUP_SCHED
 #ifdef CONFIG_SMP
