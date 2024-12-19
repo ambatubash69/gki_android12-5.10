@@ -312,6 +312,7 @@ ifneq ($(KBUILD_EXTMOD),)
 	may-sync-config :=
 endif
 
+
 ifeq ($(KBUILD_EXTMOD),)
         ifneq ($(filter %config,$(MAKECMDGOALS)),)
 		config-build := 1
@@ -775,9 +776,10 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning, format-truncation)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, format-overflow)
 KBUILD_CFLAGS	+= $(call cc-disable-warning, address-of-packed-member)
 
-if ($(shell echo "$CONFIG_CC_VERSION_TEXT" | grep -q 'Android'; echo $?),0)
+ifeq ($(shell echo "$CONFIG_CC_VERSION_TEXT" | grep -q 'Android'; echo $?),0)
 KBUILD_CFLAGS   += -mllvm -regalloc-enable-advisor=release
 endif
+
 #Enable hot cold split optimization
 KBUILD_CFLAGS   += -mllvm -hot-cold-split=true
 
