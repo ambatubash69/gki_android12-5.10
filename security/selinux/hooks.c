@@ -109,7 +109,7 @@ struct selinux_state selinux_state;
 /* SECMARK reference count */
 static atomic_t selinux_secmark_refcount = ATOMIC_INIT(0);
 
-#ifdef CONFIG_SECURITY_SELINUX_DEVELOP
+/*#ifdef CONFIG_SECURITY_SELINUX_DEVELOP
 static int selinux_enforcing_boot __initdata;
 
 static int __init enforcing_setup(char *str)
@@ -121,11 +121,12 @@ static int __init enforcing_setup(char *str)
 }
 __setup("enforcing=", enforcing_setup);
 #else
-#define selinux_enforcing_boot 1
-#endif
+#endif*/
 
-int selinux_enabled_boot __initdata = 1;
-#ifdef CONFIG_SECURITY_SELINUX_BOOTPARAM
+#define selinux_enforcing_boot 0
+
+int selinux_enabled_boot __initdata = 0;
+/*#ifdef CONFIG_SECURITY_SELINUX_BOOTPARAM
 static int __init selinux_enabled_setup(char *str)
 {
 	unsigned long enabled;
@@ -134,7 +135,7 @@ static int __init selinux_enabled_setup(char *str)
 	return 1;
 }
 __setup("selinux=", selinux_enabled_setup);
-#endif
+#endif*/
 
 static unsigned int selinux_checkreqprot_boot =
 	CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE;
