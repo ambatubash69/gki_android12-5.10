@@ -44,8 +44,6 @@ ifeq ($(CONFIG_BROKEN_GAS_INST),y)
 $(warning Detected assembler with broken .inst; disassembly will be unreliable)
 endif
 
-ifeq ($(shell echo "$CONFIG_CC_VERSION_TEXT" | grep -q 'Android'; echo $?),0)
-
 ifeq ($(shell test $(CONFIG_CLANG_VERSION) -gt 130000 2>/dev/null; echo $$?),0)
 KBUILD_CFLAGS   += -march=armv8.2-a+crypto+fp16+dotprod+nosve -mcpu=cortex-a55
 KBUILD_AFLAGS   += -march=armv8.2-a+crypto+fp16+dotprod+nosve -mcpu=cortex-a55
@@ -53,8 +51,6 @@ endif
 
 ifeq ($(CONFIG_LD_IS_LLD), y)
 KBUILD_LDFLAGS  += -mllvm -mcpu=cortex-a55
-endif
-
 endif
 
 KBUILD_CFLAGS	+= -mgeneral-regs-only	\
