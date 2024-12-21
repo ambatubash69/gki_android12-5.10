@@ -197,7 +197,8 @@ static void brutal_update_rate(struct sock *sk)
     if (!rtt_ms)
         rtt_ms = 1;
 
-    for (int i = 0; i < PKT_INFO_SLOTS; i++)
+    int i;
+    for (i = 0; i < PKT_INFO_SLOTS; i++)
     {
         if (brutal->slots[i].sec >= min_sec)
         {
